@@ -419,6 +419,12 @@
         this.changePaintOpacity(true);
     };
 
+    Window_Base.prototype.drawActorName = function (actor, x, y, width, align) {
+        width = width || 168;
+        this.changeTextColor(this.hpColor(actor));
+        this.drawText(actor.name(), x, y, width, align);
+    };
+
     Window_MenuStatus.prototype.drawItemStatus = function (index) {
         if (!isDisplayStatus) {
             return;
@@ -430,7 +436,7 @@
         var width = rect.width;
         var bottom = y + rect.height;
         var lineHeight = this.lineHeight();
-        this.drawActorName(actor, x, y + lineHeight * 0, width);
+        this.drawActorName(actor, x, y + lineHeight * 0, width, 'left');
         this.drawActorClass(actor, x, bottom - lineHeight * 4, width);
         this.drawActorIcons(actor, x, bottom - lineHeight * 1, width);
     };
