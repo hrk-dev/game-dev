@@ -6,7 +6,7 @@
 //=============================================================================
 
 /*:
- * @plugindesc Yet Another menu screen layout.
+ * @plugindesc Yet Another menu screen layout.(修改)
  * @author Sasuke KANNAZUKI, Yoji Ojima
  * 
  * @default 
