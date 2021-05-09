@@ -1,7 +1,7 @@
 [
 null,
-{"id":1,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0},
-{"id":2,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0},
+{"id":1,"list":[{"code":231,"indent":0,"parameters":[1,"Hiiro_0",0,0,0,0,100,100,255,0]},{"code":0,"indent":0,"parameters":[]}],"name":"显示日期","switchId":1,"trigger":0},
+{"id":2,"list":[{"code":221,"indent":0,"parameters":[]},{"code":105,"indent":0,"parameters":[2,false]},{"code":405,"indent":0,"parameters":["测试"]},{"code":405,"indent":0,"parameters":["测试"]},{"code":405,"indent":0,"parameters":["测试"]},{"code":405,"indent":0,"parameters":["测试"]},{"code":405,"indent":0,"parameters":["测试"]},{"code":405,"indent":0,"parameters":["测试"]},{"code":354,"indent":0,"parameters":[]},{"code":0,"indent":0,"parameters":[]}],"name":"滚动字幕","switchId":1,"trigger":0},
 {"id":3,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0},
 {"id":4,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0}
 ]

@@ -77,6 +77,7 @@ var _mog_credits_wtc_makeCommandList = Window_TitleCommand.prototype.makeCommand
 Window_TitleCommand.prototype.makeCommandList = function() {
     _mog_credits_wtc_makeCommandList.call(this);
 	this.addCommand(String(Moghunter.credits_commandName),   'mcredits');
+	this.addCommand('test', 'test');
 };	
 	
 //=============================================================================
@@ -89,7 +90,17 @@ Window_TitleCommand.prototype.makeCommandList = function() {
 var _mog_credits_createCommandWindow = Scene_Title.prototype.createCommandWindow;
 Scene_Title.prototype.createCommandWindow = function() {
     _mog_credits_createCommandWindow.call(this);
-	this._commandWindow.setHandler('mcredits',  this.commandMCredits.bind(this));
+	this._commandWindow.setHandler('mcredits', this.commandMCredits.bind(this));
+	this._commandWindow.setHandler('test', this.test.bind(this));
+};
+
+// 公共事件
+Scene_Title.prototype.test = function () {
+	DataManager.setupNewGame();
+	this._commandWindow.close();
+	this.fadeOutAll();
+	SceneManager.goto(Scene_Map);
+	$gameTemp.reserveCommonEvent(2)
 };
 
 //==============================
