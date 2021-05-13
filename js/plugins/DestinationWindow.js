@@ -19,7 +19,7 @@
 
 /*:
  * @plugindesc 行动目标窗口插件(修改)
- * @author トリアコンタン 翻译xuhao1996
+ * @author トリアコンタン 翻译xuhao1996 修改Blacktunes
  *
  * @param 目标窗口开关ID
  * @desc 是行动目标窗口显示的开关ID

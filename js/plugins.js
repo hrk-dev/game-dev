@@ -4,7 +4,7 @@ var $plugins =
 [
 {"name":"TS_Debug","status":true,"description":"","parameters":{}},
 {"name":"Community_Basic","status":true,"description":"Plugin used to set basic parameters.","parameters":{"cacheLimit":"10","screenWidth":"1024","screenHeight":"726","changeWindowWidthTo":"1024","changeWindowHeightTo":"726","renderingMode":"auto","alwaysDash":"off"}},
-{"name":"ShowLogo","status":true,"description":"打开游戏显示LOGO，根据官方插件MadeWithMv修改，增加跳过功能","parameters":{"是否显示LOGO图":"true","LOGO图片":"MadeWithMv","是否显示自定义图片":"true","自定义图片":"GameOver","渐隐时长\r":"120","渐入时长\r":"120","显示时长\r":"160"}},
+{"name":"ShowLogo","status":true,"description":"打开游戏显示LOGO，根据官方插件MadeWithMv修改，增加跳过功能","parameters":{"是否显示LOGO图":"true","LOGO图片":"MadeWithMv","是否显示自定义图片":"true","自定义图片":"GameOver","渐隐时长":"50","渐入时长":"100","显示时长":"100"}},
 {"name":"VIPArcher_Bubble_Message","status":true,"description":"VIPArcher_气泡对话框","parameters":{"BubbleTagName":"BubbleTag","TopMessageReviseY":"0","TopTagReviseY":"0","BottomMessageReviseY":"0","BottomTagReviseY":"0"}},
 {"name":"aligncenter","status":true,"description":"对话框文字居中居右对齐插件","parameters":{}},
 {"name":"GALV_MessageBusts","status":true,"description":"(v.2.6) Displays a bust image instead of selected face image","parameters":{"Bust Priority":"1","Bust Position":"1","Text X Offset":"390","Filename Append":""}},
@@ -18,5 +18,5 @@ var $plugins =
 {"name":"blur","status":true,"description":"屏幕截图&模糊 工具","parameters":{"blurLevel":"5"}},
 {"name":"MenuAlignCenter","status":true,"description":"文字居中","parameters":{}},
 {"name":"DestinationWindow","status":true,"description":"行动目标窗口插件(修改过)","parameters":{"目标窗口开关ID":"1","事件中关闭":"true","窗口X坐标":"24","窗口Y坐标":"24","窗口透明度":"200","渐隐时间":"8","字体大小":"22","默认文字":"随便逛逛吧"}},
-{"name":"Credits","status":true,"description":"制作组","parameters":{"公共事件ID":"2","标题":"制作组"}}
+{"name":"Credits","status":true,"description":"主页按钮","parameters":{"按钮标题A":"制作组","按钮A公共事件ID":"2","按钮标题B":"","按钮B公共事件ID":"3","回忆之间组按钮标题":"回忆之间","回忆之间公共事件ID":"4"}}
 ];
