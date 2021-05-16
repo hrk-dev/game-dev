@@ -18,5 +18,6 @@ var $plugins =
 {"name":"blur","status":true,"description":"屏幕截图&模糊 工具","parameters":{"blurLevel":"5"}},
 {"name":"MenuAlignCenter","status":true,"description":"文字居中","parameters":{}},
 {"name":"DestinationWindow","status":true,"description":"行动目标窗口插件(修改过)","parameters":{"目标窗口开关ID":"1","事件中关闭":"true","窗口X坐标":"24","窗口Y坐标":"24","窗口透明度":"200","渐隐时间":"8","字体大小":"22","默认文字":"随便逛逛吧"}},
-{"name":"Credits","status":true,"description":"主页按钮","parameters":{"按钮标题A":"制作组","按钮A公共事件ID":"2","按钮标题B":"","按钮B公共事件ID":"3","回忆之间组按钮标题":"回忆之间","回忆之间公共事件ID":"4"}}
+{"name":"Credits","status":true,"description":"主页按钮","parameters":{"按钮标题A":"制作组","按钮A公共事件ID":"2","按钮标题B":"","按钮B公共事件ID":"3","回忆之间组按钮标题":"回忆之间","回忆之间公共事件ID":"4"}},
+{"name":"TitleCommandPosition","status":true,"description":"Changes the position of the title command window.","parameters":{"Offset X":"-440","Offset Y":"100","Width":"160","Background":"2"}}
 ];

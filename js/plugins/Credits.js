@@ -48,6 +48,8 @@ Window_TitleCommand.prototype.makeCommandList = function () {
 	if (globalInfo[0].memory) {
 		this.addCommand(String(Credits.Parameters['回忆之间组按钮标题'] || '回忆之间'), 'memory');
 	}
+	this.addCommand('退出游戏', 'exit_game');
+
 };
 
 
@@ -57,6 +59,7 @@ Scene_Title.prototype.createCommandWindow = function () {
 	this._commandWindow.setHandler('mcredits_A', this.commandCreditsA.bind(this));
 	this._commandWindow.setHandler('mcredits_B', this.commandCreditsB.bind(this));
 	this._commandWindow.setHandler('memory', this.commandMemory.bind(this));
+	this._commandWindow.setHandler('exit_game', this.commandExit.bind(this));
 };
 
 Scene_Title.prototype.commandCreditsA = function () {
@@ -81,6 +84,10 @@ Scene_Title.prototype.commandMemory = function () {
 	this.fadeOutAll();
 	SceneManager.goto(Scene_Map);
 	$gameTemp.reserveCommonEvent(Number(Credits.Parameters['回忆之间公共事件ID'] || 3))
+};
+
+Scene_Title.prototype.commandExit = function () {
+	SceneManager.exit()
 };
 
 var _credits_command = {
@@ -113,4 +120,18 @@ Game_System.prototype.setCreditsNormal = function (flag) {
 	const globalInfo = DataManager.loadGlobalInfo() || [];
 	globalInfo[0] = { ...globalInfo[0], ...{ normal: flag } };
 	DataManager.saveGlobalInfo(globalInfo);
+};
+
+Window_TitleCommand.prototype.drawText = function (text, x, y, maxWidth) {
+	this.contents.drawText(text, x, y, maxWidth, this.lineHeight(), 'left');
+};
+
+Window_Base.prototype.standardFontFace = function () {
+	if ($gameSystem.isChinese()) {
+		return 'GameFont, SimHei, Heiti TC, sans-serif';
+	} else if ($gameSystem.isKorean()) {
+		return 'Dotum, AppleGothic, sans-serif';
+	} else {
+		return 'GameFont';
+	}
 };
