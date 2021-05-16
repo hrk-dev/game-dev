@@ -121,17 +121,3 @@ Game_System.prototype.setCreditsNormal = function (flag) {
 	globalInfo[0] = { ...globalInfo[0], ...{ normal: flag } };
 	DataManager.saveGlobalInfo(globalInfo);
 };
-
-Window_TitleCommand.prototype.drawText = function (text, x, y, maxWidth) {
-	this.contents.drawText(text, x, y, maxWidth, this.lineHeight(), 'left');
-};
-
-Window_Base.prototype.standardFontFace = function () {
-	if ($gameSystem.isChinese()) {
-		return 'GameFont, SimHei, Heiti TC, sans-serif';
-	} else if ($gameSystem.isKorean()) {
-		return 'Dotum, AppleGothic, sans-serif';
-	} else {
-		return 'GameFont';
-	}
-};
