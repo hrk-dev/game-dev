@@ -2134,6 +2134,15 @@ Graphics._playVideo = function (src) {
     this._video.onended = this._onVideoEnd.bind(this);
     this._video.load();
     this._videoLoading = true;
+    if (vueApp) {
+        vueApp.videoPlay = true
+        this._video.oncanplay = () => {
+            vueApp.video.duration = this._video.duration | 0
+        }
+        this._video.ontimeupdate = () => {
+            vueApp.video.current = this._video.currentTime | 0
+        }
+    }
 };
 
 /**
@@ -2777,6 +2786,9 @@ Graphics._onVideoError = function () {
  * @private
  */
 Graphics._onVideoEnd = function () {
+    if (vueApp) {
+        vueApp.videoPlay = false
+    }
     this._updateVisibility(false);
 };
 
