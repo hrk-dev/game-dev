@@ -2135,7 +2135,7 @@ Graphics._playVideo = function (src) {
     this._video.load();
     this._videoLoading = true;
     if (vueApp) {
-        vueApp.videoPlay = true
+        vueApp.video.show = true
         this._video.oncanplay = () => {
             vueApp.video.duration = this._video.duration | 0
         }
@@ -2378,6 +2378,14 @@ Graphics._updateRealScale = function () {
         if (h >= 1 && h - 0.01 <= 1) h = 1;
         if (v >= 1 && v - 0.01 <= 1) v = 1;
         this._realScale = Math.min(h, v);
+
+        if (vueApp) {
+            vueApp.main.width = this._width * this._realScale
+            vueApp.main.height = this._height * this._realScale
+            vueApp.main.scale = this._realScale
+            const margin = (window.innerHeight - 30 - vueApp.main.height) / 2;
+            vueApp.main.margin = `${margin + 30}px auto ${margin}px auto`
+        }
     } else {
         this._realScale = this._scale;
     }
@@ -2787,7 +2795,7 @@ Graphics._onVideoError = function () {
  */
 Graphics._onVideoEnd = function () {
     if (vueApp) {
-        vueApp.videoPlay = false
+        vueApp.video.show = false
     }
     this._updateVisibility(false);
 };
@@ -2849,8 +2857,8 @@ Graphics._onKeyDown = function (event) {
                 this._switchFPSMeter();
                 break;
             case 114:   // F3
-                event.preventDefault();
-                this._switchStretchMode();
+                // event.preventDefault();
+                // this._switchStretchMode();
                 break;
             case 115:   // F4
                 event.preventDefault();

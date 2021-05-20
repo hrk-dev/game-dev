@@ -11,133 +11,10 @@
     <link rel="icon" href="favicon.ico" type="image/png" />
     <link rel="apple-touch-icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" href="fonts/gamefont.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/animation.css" />
     <script src="js/libs/vue.js"></script>
-    <style>
-      body {
-        margin: 0;
-      }
-      #app {
-        height: 100vh;
-        width: 100vw;
-      }
-      #title {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 30px;
-        background-color: #f5c1bb;
-        -webkit-app-region: drag;
-        z-index: 100;
-        color: white;
-        line-height: 30px;
-        transition: background-color 0.2s;
-      }
-      .icon-text {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        animation: title-show 1s;
-        animation-fill-mode: forwards;
-      }
-      .icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 30px;
-        width: 30px;
-      }
-      .text {
-        margin-left: 5px;
-      }
-      .btn-list {
-        display: flex;
-      }
-      .btn {
-        line-height: 27px;
-        height: 27px;
-        width: 45px;
-        text-align: center;
-        -webkit-app-region: no-drag;
-      }
-      .btn:hover {
-        background: #fadbd8;
-      }
-      .btn:active {
-        background: #f5b7bb;
-      }
-      #main {
-        overflow: hidden;
-        position: absolute;
-        inset: 0px;
-        z-index: 101;
-        font-size: 30px;
-        line-height: 30px;
-      }
-      .danmu-list {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-      }
-      .danmu {
-        display: inline;
-        word-break: keep-all;
-        white-space: nowrap;
-        z-index: 102;
-        position: absolute;
-        left: 100%;
-        animation: danmu 5s linear;
-        color: pink;
-        text-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
-      }
-      .video {
-        z-index: 1;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-      }
-      .video-time {
-        position: absolute;
-        bottom: 5px;
-        left: 5px;
-        color: #fff;
-      }
-      .video-btn {
-        display: block;
-        background: pink;
-        border-radius: 30%;
-        position: relative;
-        text-align: center;
-        bottom: 5px;
-        left: 50%;
-        transform: translateX(-50%);
-        cursor: pointer;
-      }
-      @keyframes danmu {
-        from {
-          left: 100%;
-        }
-        to {
-          left: -100%;
-        }
-      }
-      @keyframes title-show {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-    </style>
-    <title>game</title>
+    <title>Hiiro</title>
   </head>
   <body style="background-color: black">
     <div id="app">
@@ -160,10 +37,9 @@
       </div>
       <div
         id="main"
-        :style="{width: _width + 'px', height: _height + 'px', margin: _margin}"
-        @click="stopDanmu"
+        :style="{width: main.width + 'px', height: main.height + 'px', margin: main.margin}"
       >
-        <div class="video" v-show="videoPlay">
+        <div class="video" v-show="video.show">
           <div
             class="video-time"
             :style="{
@@ -188,7 +64,10 @@
         </div>
         <div
           class="danmu-list"
-          :style="{fontSize: this._fontSize + 'px', lineHeight: this._fontSize + 'px'}"
+          :style="{
+            fontSize: this._fontSize + 'px',
+            lineHeight: this._fontSize + 'px'
+          }"
         >
           <template v-for="(item, key) in list">
             <div
@@ -201,6 +80,116 @@
             </div>
           </template>
         </div>
+        <transition name="fade">
+          <div class="end-wrapper" v-if="bug.show">
+            <div
+              class="end-text"
+              :style="{
+            fontSize: this._fontSize + 'px',
+            lineHeight: (this._fontSize + 4) + 'px',
+            top: 160 * main.scale + 'px'
+          }"
+            >
+              <div
+                class="end-title"
+                :style="{
+                'font-size': 36 * this.main.scale + 'px'
+              }"
+              >
+                特别鸣谢
+              </div>
+              <div
+                :style="{
+                'font-size': 24 * this.main.scale + 'px'
+              }"
+              >
+                Special Thanks
+              </div>
+              <div
+                class="end-title"
+                :style="{
+                'font-size': 36 * this.main.scale + 'px'
+              }"
+              >
+                Debug
+              </div>
+              <div
+                :style="{
+                'font-size': 24 * this.main.scale + 'px'
+              }"
+              >
+                You
+              </div>
+              <div
+                class="end-title"
+                :style="{
+                'font-size': 36 * this.main.scale + 'px'
+              }"
+              >
+                Bug
+              </div>
+              <div
+                class="end-text-bug"
+                :style="{
+                filter: bug.blur,
+                color: bug.color,
+                'font-size': 24 * this.main.scale + 'px'
+              }"
+              >
+                {{bug.text}}
+              </div>
+              <div class="end-text-animation" v-show="bug.animation">
+                <div
+                  class="end-title"
+                  :style="{
+                'font-size': 36 * this.main.scale + 'px'
+              }"
+                >
+                  特别鸣谢
+                </div>
+                <div
+                  :style="{
+                'font-size': 24 * this.main.scale + 'px'
+              }"
+                >
+                  Special Thanks
+                </div>
+                <div
+                  class="end-title"
+                  :style="{
+                'font-size': 36 * this.main.scale + 'px'
+              }"
+                >
+                  Debug
+                </div>
+                <div
+                  :style="{
+                'font-size': 24 * this.main.scale + 'px'
+              }"
+                >
+                  You
+                </div>
+                <div
+                  class="end-title"
+                  :style="{
+                'font-size': 36 * this.main.scale + 'px'
+              }"
+                >
+                  Bug
+                </div>
+                <div
+                  class="end-text-bug"
+                  :style="{
+                filter: bug.blur,
+                'font-size': 24 * this.main.scale + 'px'
+              }"
+                >
+                  {{bug.text}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </transition>
       </div>
     </div>
     <script type="text/javascript" src="js/libs/pixi.js"></script>
@@ -220,170 +209,6 @@
     <script type="text/javascript" src="js/rpg_windows.js"></script>
     <script type="text/javascript" src="js/plugins.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/vue_main.js"></script>
   </body>
-  <script>
-    var electron = require("electron");
-    var vueApp = new Vue({
-      el: "#app",
-      data: () => ({
-        title: "Hiiro",
-        index: 0,
-        color: "",
-        list: [],
-        timer: [],
-        main: {
-          scale: 1,
-          width: 1024,
-          height: 726,
-        },
-        videoPlay: false,
-        video: {
-          current: 0,
-          duration: 0,
-        },
-      }),
-      computed: {
-        _width() {
-          return this.main.scale * this.main.width;
-        },
-        _height() {
-          return this.main.scale * this.main.height;
-        },
-        _margin() {
-          const margin = (window.innerHeight - 30 - this._height) / 2;
-          return `${margin + 30}px auto ${margin}px auto`;
-        },
-        _fontSize() {
-          return (this.main.scale * 30) | 0;
-        },
-        _currentTime() {
-          return this.secondToTime(this.video.current);
-        },
-        _durationTime() {
-          return this.secondToTime(this.video.duration);
-        },
-      },
-      methods: {
-        ipc(type) {
-          electron.ipcRenderer.send(type);
-        },
-        secondToTime(result) {
-          const h =
-            Math.floor(result / 3600) < 10
-              ? "0" + Math.floor(result / 3600)
-              : Math.floor(result / 3600);
-          const m =
-            Math.floor((result / 60) % 60) < 10
-              ? "0" + Math.floor((result / 60) % 60)
-              : Math.floor((result / 60) % 60);
-          const s =
-            Math.floor(result % 60) < 10
-              ? "0" + Math.floor(result % 60)
-              : Math.floor(result % 60);
-          return `${h}:${m}:${s}`;
-        },
-        setMain() {
-          let h = window.innerWidth / this.main.width;
-          let v = (window.innerHeight - 30) / this.main.height;
-          if (h >= 1 && h - 0.01 <= 1) h = 1;
-          if (v >= 1 && v - 0.01 <= 1) v = 1;
-          this.main.scale = Math.min(h, v);
-        },
-        setTitle() {
-          if (this.index > this.titleList.length - 1) {
-            this.index = 0;
-          }
-          if (this.index === 8) {
-            this.title = this.titleList[this.index] + "irro";
-          } else {
-            this.title = this.titleList[this.index] + "iiro";
-          }
-          ++this.index;
-        },
-        random() {
-          const line = this._height / this._fontSize;
-          const curr_line = (Math.random() * line) | 0;
-          const top = curr_line * this._fontSize;
-          const temp = top / this._height;
-          return temp * 100 + "%";
-        },
-        setDanmu(i) {
-          this.list[i].show = true;
-          this.timer[i] = setTimeout(() => {
-            this.list[i].show = false;
-            this.list[i].top = this.random();
-            this.timer[i] = setTimeout(() => {
-              this.setDanmu(i);
-            }, Math.random() * 1000);
-          }, 5 * 1000);
-        },
-        showDanmu() {
-          for (let i = 0; i < 30; i++) {
-            this.timer[i] = setTimeout(() => {
-              this.setDanmu(i);
-            }, Math.random() * Math.random() * 10000);
-          }
-        },
-        stopDanmu() {
-          for (let i = 0; i < 30; i++) {
-            clearTimeout(this.timer[i]);
-            this.list[i].show = false;
-          }
-        },
-        stopVideo() {
-          if (Graphics.isVideoPlaying()) {
-            Graphics._video.pause();
-            Graphics._updateVisibility(false);
-            this.videoPlay = false;
-          }
-        },
-      },
-      mounted() {
-        this.titleList = [
-          "H",
-          "A",
-          "B",
-          "C",
-          "D",
-          "E",
-          "F",
-          "G",
-          "H",
-          "I",
-          "J",
-          "K",
-          "L",
-          "M",
-          "N",
-          "O",
-          "P",
-          "Q",
-          "R",
-          "S",
-          "T",
-          "U",
-          "V",
-          "W",
-          "X",
-          "Y",
-          "Z",
-        ];
-        this.setTitle();
-
-        this.setMain();
-
-        window.addEventListener("resize", this.setMain);
-
-        for (let i = 0; i < 30; i++) {
-          this.list.push({
-            text: "Hiiro...Hiiro...寂しい",
-            top: this.random(),
-            show: false,
-          });
-        }
-
-        this.ipc("vue:ready");
-      },
-    });
-  </script>
 </html>
