@@ -666,8 +666,11 @@ StorageManager.restoreBackup = function(savefileId) {
     }
 };
 
+/**
+ * @change
+ */
 StorageManager.isLocalMode = function() {
-    return Utils.isNwjs();
+    return true
 };
 
 StorageManager.saveToLocalFile = function(savefileId, json) {
@@ -752,10 +755,13 @@ StorageManager.removeWebStorage = function(savefileId) {
     localStorage.removeItem(key);
 };
 
+/**
+ * @changes
+ */
 StorageManager.localFileDirectoryPath = function() {
     var path = require('path');
 
-    var base = path.dirname(process.mainModule.filename);
+    const base = __dirname.replace('/app.asar', '').replace('\\app.asar', '')
     return path.join(base, 'save/');
 };
 

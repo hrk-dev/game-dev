@@ -28,6 +28,7 @@ body {
   justify-content: center;
   align-items: center;
   opacity: 0;
+  animation-delay: 1s;
   animation: title-show 1s;
   animation-fill-mode: forwards;
 }

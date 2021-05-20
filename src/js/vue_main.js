@@ -3,6 +3,7 @@ var electron = require("electron");
 var vueApp = new Vue({
   el: "#app",
   data: () => ({
+    ready: false,
     title: "Hiiro",
     index: 0,
     color: "",
@@ -167,6 +168,9 @@ var vueApp = new Vue({
       });
     }
 
-    this.ipc("vue:ready");
+    setTimeout(() => {
+      this.ipc("vue:ready");
+      this.ready = true
+    }, 50)
   },
 });

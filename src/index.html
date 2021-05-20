@@ -1,29 +1,214 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-        <meta name="viewport" content="user-scalable=no">
-        <link rel="icon" href="icon/icon.png" type="image/png">
-        <link rel="apple-touch-icon" href="icon/icon.png">
-        <link rel="stylesheet" type="text/css" href="fonts/gamefont.css">
-        <title>game</title>
-    </head>
-    <body style="background-color: black">
-        <script type="text/javascript" src="js/libs/pixi.js"></script>
-        <script type="text/javascript" src="js/libs/pixi-tilemap.js"></script>
-        <script type="text/javascript" src="js/libs/pixi-picture.js"></script>
-        <script type="text/javascript" src="js/libs/fpsmeter.js"></script>
-        <script type="text/javascript" src="js/libs/lz-string.js"></script>
-        <script type="text/javascript" src="js/libs/iphone-inline-video.browser.js"></script>
-        <script type="text/javascript" src="js/rpg_core.js"></script>
-        <script type="text/javascript" src="js/rpg_managers.js"></script>
-        <script type="text/javascript" src="js/rpg_objects.js"></script>
-        <script type="text/javascript" src="js/rpg_scenes.js"></script>
-        <script type="text/javascript" src="js/rpg_sprites.js"></script>
-        <script type="text/javascript" src="js/rpg_windows.js"></script>
-        <script type="text/javascript" src="js/plugins.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="viewport" content="user-scalable=no" />
+    <link rel="icon" href="favicon.ico" type="image/png" />
+    <link rel="apple-touch-icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="fonts/gamefont.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/animation.css" />
+    <script src="js/libs/vue.js"></script>
+    <title>Hiiro</title>
+  </head>
+  <body style="background-color: black">
+    <div id="app">
+      <div id="title" :style="{background: color}">
+        <div class="icon-text">
+          <div class="icon">
+            <img style="height: 60%" src="./favicon.ico" />
+          </div>
+          <div class="text">{{title}}</div>
+        </div>
+        <div class="btn-list">
+          <div class="btn" @click="ipc('app:reload')">Re</div>
+          <div class="btn" style="width: 50px" @click="ipc('app:dev')">Dev</div>
+          <div class="btn" style="line-height: 20px" @click="ipc('app:min')">
+            _
+          </div>
+          <div class="btn" @click="ipc('app:max')">□</div>
+          <div class="btn" @click="ipc('app:quit')">×</div>
+        </div>
+      </div>
+      <div
+        id="main"
+        :style="{width: main.width + 'px', height: main.height + 'px', margin: main.margin}"
+      >
+        <div class="video" v-show="video.show">
+          <div
+            class="video-time"
+            :style="{
+              'font-size': 16 * main.scale + 'px',
+              'line-height': 30  * main.scale + 'px'
+            }"
+          >
+            {{_currentTime}}/{{_durationTime}}
+          </div>
+          <div
+            class="video-btn btn"
+            :style="{
+              'font-size': 22 * main.scale + 'px',
+              'line-height': 25  * main.scale + 'px',
+              width: 30 * main.scale + 'px',
+              height: 30 * main.scale + 'px'
+            }"
+            @click="stopVideo"
+          >
+            ■
+          </div>
+        </div>
+        <div
+          class="danmu-list"
+          :style="{
+            fontSize: this._fontSize + 'px',
+            lineHeight: this._fontSize + 'px'
+          }"
+        >
+          <template v-for="(item, key) in list">
+            <div
+              :key="key"
+              class="danmu"
+              :style="{top: item.top}"
+              v-show="item.show"
+            >
+              {{item.text}}
+            </div>
+          </template>
+        </div>
+        <transition name="fade">
+          <div class="end-wrapper" v-if="bug.show">
+            <div
+              class="end-text"
+              :style="{
+            fontSize: this._fontSize + 'px',
+            lineHeight: (this._fontSize + 4) + 'px',
+            top: 160 * main.scale + 'px'
+          }"
+            >
+              <div
+                class="end-title"
+                :style="{
+                'font-size': 36 * this.main.scale + 'px'
+              }"
+              >
+                特别鸣谢
+              </div>
+              <div
+                :style="{
+                'font-size': 24 * this.main.scale + 'px'
+              }"
+              >
+                Special Thanks
+              </div>
+              <div
+                class="end-title"
+                :style="{
+                'font-size': 36 * this.main.scale + 'px'
+              }"
+              >
+                Debug
+              </div>
+              <div
+                :style="{
+                'font-size': 24 * this.main.scale + 'px'
+              }"
+              >
+                You
+              </div>
+              <div
+                class="end-title"
+                :style="{
+                'font-size': 36 * this.main.scale + 'px'
+              }"
+              >
+                Bug
+              </div>
+              <div
+                class="end-text-bug"
+                :style="{
+                filter: bug.blur,
+                color: bug.color,
+                'font-size': 24 * this.main.scale + 'px'
+              }"
+              >
+                {{bug.text}}
+              </div>
+              <div class="end-text-animation" v-show="bug.animation">
+                <div
+                  class="end-title"
+                  :style="{
+                'font-size': 36 * this.main.scale + 'px'
+              }"
+                >
+                  特别鸣谢
+                </div>
+                <div
+                  :style="{
+                'font-size': 24 * this.main.scale + 'px'
+              }"
+                >
+                  Special Thanks
+                </div>
+                <div
+                  class="end-title"
+                  :style="{
+                'font-size': 36 * this.main.scale + 'px'
+              }"
+                >
+                  Debug
+                </div>
+                <div
+                  :style="{
+                'font-size': 24 * this.main.scale + 'px'
+              }"
+                >
+                  You
+                </div>
+                <div
+                  class="end-title"
+                  :style="{
+                'font-size': 36 * this.main.scale + 'px'
+              }"
+                >
+                  Bug
+                </div>
+                <div
+                  class="end-text-bug"
+                  :style="{
+                filter: bug.blur,
+                'font-size': 24 * this.main.scale + 'px'
+              }"
+                >
+                  {{bug.text}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </transition>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/libs/pixi.js"></script>
+    <script type="text/javascript" src="js/libs/pixi-tilemap.js"></script>
+    <script type="text/javascript" src="js/libs/pixi-picture.js"></script>
+    <script type="text/javascript" src="js/libs/fpsmeter.js"></script>
+    <script type="text/javascript" src="js/libs/lz-string.js"></script>
+    <script
+      type="text/javascript"
+      src="js/libs/iphone-inline-video.browser.js"
+    ></script>
+    <script type="text/javascript" src="js/rpg_core.js"></script>
+    <script type="text/javascript" src="js/rpg_managers.js"></script>
+    <script type="text/javascript" src="js/rpg_objects.js"></script>
+    <script type="text/javascript" src="js/rpg_scenes.js"></script>
+    <script type="text/javascript" src="js/rpg_sprites.js"></script>
+    <script type="text/javascript" src="js/rpg_windows.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/vue_main.js"></script>
+  </body>
 </html>

@@ -1,21 +1,16 @@
 {
   "name": "game-electron",
   "version": "1.0.0",
-  "main": "dist/main.js",
+  "main": "src/main.js",
   "scripts": {
-    "watch": "nodemon --watch build --watch src -e js,html bin/build.js",
-    "watch:start": "nodemon --watch build --watch src -e js,html --exec yarn dev",
-    "build": "node bin/build.js",
+    "watch": "nodemon --watch build --watch src --exec electron .",
     "start": "electron .",
-    "dev": "yarn build && electron .",
-    "dist": "rimraf dist && yarn build && electron-packager dist Hiiro --overwrite --icon=dist/favicon.ico --asar --out=dist_electron"
+    "dist": "electron-packager src Hiiro --overwrite --icon=src/favicon.ico --asar --out=dist"
   },
   "author": "Blacktunes",
   "devDependencies": {
     "electron": "^12.0.7",
     "electron-packager": "^15.2.0",
-    "fs-extra": "^10.0.0",
-    "nodemon": "^2.0.7",
-    "rimraf": "^3.0.2"
+    "nodemon": "^2.0.7"
   }
 }
