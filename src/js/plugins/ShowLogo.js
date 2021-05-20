@@ -36,16 +36,6 @@
  * @type Number
  *
  */
-const ShowLogo = {};
-ShowLogo.Parameters = PluginManager.parameters('ShowLogo');
-ShowLogo.ShowLogo = JSON.parse(ShowLogo.Parameters['是否显示LOGO图']);
-ShowLogo.LogoImage = String(ShowLogo.Parameters['LOGO图片']);
-ShowLogo.ShowCustom = JSON.parse(ShowLogo.Parameters['是否显示自定义图片']);
-ShowLogo.CustomImage = String(ShowLogo.Parameters['自定义图片']);
-ShowLogo.FadeOutTime = Number(ShowLogo.Parameters['渐隐时长']) || 120;
-ShowLogo.FadeInTime = Number(ShowLogo.Parameters['渐入时长']) || 120;
-ShowLogo.WaitTime = Number(ShowLogo.Parameters['显示时长']) || 160;
-
 
 //-----------------------------------------------------------------------------
 // Scene_Splash
@@ -57,6 +47,15 @@ function Scene_Splash() {
 }
 
 (function () {
+    const ShowLogo = {};
+    ShowLogo.Parameters = PluginManager.parameters('ShowLogo');
+    ShowLogo.ShowLogo = JSON.parse(ShowLogo.Parameters['是否显示LOGO图']);
+    ShowLogo.LogoImage = String(ShowLogo.Parameters['LOGO图片']);
+    ShowLogo.ShowCustom = JSON.parse(ShowLogo.Parameters['是否显示自定义图片']);
+    ShowLogo.CustomImage = String(ShowLogo.Parameters['自定义图片']);
+    ShowLogo.FadeOutTime = Number(ShowLogo.Parameters['渐隐时长']) || 120;
+    ShowLogo.FadeInTime = Number(ShowLogo.Parameters['渐入时长']) || 120;
+    ShowLogo.WaitTime = Number(ShowLogo.Parameters['显示时长']) || 160;
 
     //-----------------------------------------------------------------------------
     // Scene_Boot

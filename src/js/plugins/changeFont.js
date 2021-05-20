@@ -1,3 +1,8 @@
+/*:
+ * @plugindesc 修改字体
+ * @author Blacktunes
+ */
+
 Window_Base.prototype.standardFontFace = function () {
   if ($gameSystem.isChinese()) {
     return 'GameFont, SimHei, Heiti TC, sans-serif';
@@ -8,6 +13,3 @@ Window_Base.prototype.standardFontFace = function () {
   }
 };
 
-Window_TitleCommand.prototype.drawText = function (text, x, y, maxWidth) {
-  this.contents.drawText(text, x, y, maxWidth, this.lineHeight(), 'left');
-};
