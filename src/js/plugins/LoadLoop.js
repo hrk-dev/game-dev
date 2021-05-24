@@ -4,7 +4,7 @@
  */
 
 DataManager.loadLoop = function (saveId) {
-  const map = Object.create($gameMap)
+  const map = $gameMap
   if (DataManager.loadGame(saveId)) {
     SoundManager.playLoad();
     $gameMap = map
