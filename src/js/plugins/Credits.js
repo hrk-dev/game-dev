@@ -31,41 +31,33 @@
 
 
 (function () {
-	const globalInfo = DataManager.loadGlobalInfo() || [];
-	globalInfo[0] = { ...{ memory: false, credits: false, normal: false }, ...globalInfo[0] };
-	DataManager.saveGlobalInfo(globalInfo);
+	const _globalInfo = DataManager.loadGlobalInfo() || [];
+	_globalInfo[0] = { ...{ memory: false, credits: false, normal: false }, ..._globalInfo[0] };
+	DataManager.saveGlobalInfo(_globalInfo);
 
 	var Credits = {};
 	Credits.Parameters = PluginManager.parameters('Credits');
 
+	var _makeCommandList = Window_TitleCommand.prototype.makeCommandList;
 	Window_TitleCommand.prototype.makeCommandList = function () {
-		const globalInfo = DataManager.loadGlobalInfo() || []
-		this.addCommand((globalInfo[0].loop && globalInfo[0].loop > 0) ? '第一幕' : TextManager.newGame, 'newGame');
-		if (globalInfo[0].loop && globalInfo[0].loop > 0) {
-			this.addCommand('第二幕', 'next_round_2');
-		}
-		if (globalInfo[0].loop && globalInfo[0].loop > 1) {
-			this.addCommand('第三幕', 'next_round_3');
-		}
-		this.addCommand(TextManager.continue_, 'continue', this.isContinueEnabled());
-		this.addCommand(TextManager.options, 'options');
-		if (globalInfo[0].credits) {
+		const globalInfo = DataManager.loadGlobalInfo() || [];
+
+		_makeCommandList.call(this);
+		if (globalInfo[0] && globalInfo[0].credits) {
 			this.addCommand(String(Credits.Parameters['按钮标题A'] || '制作组'), 'mcredits_A')
 		} else {
 			this.addCommand(String(Credits.Parameters['按钮标题B'] || '寂しい'), 'mcredits_B')
 		}
-		if (globalInfo[0].memory) {
+		if (globalInfo[0] && globalInfo[0].memory) {
 			this.addCommand(String(Credits.Parameters['回忆之间组按钮标题'] || '回忆之间'), 'memory');
 		}
-		this.addCommand('退出游戏', 'exit_game');
+		this.addCommand('Exit', 'exit_game');
 	};
 
 
 	var _credits = Scene_Title.prototype.createCommandWindow;
 	Scene_Title.prototype.createCommandWindow = function () {
 		_credits.call(this);
-		this._commandWindow.setHandler('next_round_2', this.nextRound.bind(this, 101));
-		this._commandWindow.setHandler('next_round_3', this.nextRound.bind(this, 102));
 		this._commandWindow.setHandler('mcredits_A', this.commandCreditsA.bind(this));
 		this._commandWindow.setHandler('mcredits_B', this.commandCreditsB.bind(this));
 		this._commandWindow.setHandler('memory', this.commandMemory.bind(this));
@@ -73,14 +65,14 @@
 	};
 
 	Scene_Title.prototype.nextRound = function (loop) {
-		if (!DataManager.loadGame(loop)) {
+		if (DataManager.loadGame(loop)) {
 			SoundManager.playLoad();
 			this.fadeOutAll();
-			SceneManager.goto(Scene_Map);
 			if ($gameSystem.versionId() !== $dataSystem.versionId) {
 				$gamePlayer.reserveTransfer($gameMap.mapId(), $gamePlayer.x, $gamePlayer.y);
 				$gamePlayer.requestMapReload();
 			}
+			SceneManager.goto(Scene_Map);
 			this._loadSuccess = true;
 			$gameTemp.reserveCommonEvent(loop === 101 ? 5 : 6)
 		} else {

@@ -374,7 +374,11 @@ DataManager.lastAccessedSavefileId = function () {
  * @change
  */
 DataManager.saveGameWithoutRescue = function (savefileId) {
-    var json = JsonEx.stringify(this.makeSaveContents());
+    const saveContents = this.makeSaveContents()
+    if (savefileId > 100) {
+        saveContents.map._interpreter = new Game_Interpreter()
+    }
+    var json = JsonEx.stringify(saveContents);
     if (json.length >= 200000) {
         console.warn('Save data too big!');
     }
@@ -394,13 +398,17 @@ DataManager.saveGameWithoutRescue = function (savefileId) {
     return true;
 };
 
+/**
+ * @change
+ */
 DataManager.loadGameWithoutRescue = function (savefileId) {
-    var globalInfo = this.loadGlobalInfo();
-    if (this.isThisGameFile(savefileId)) {
+    if (this.isThisGameFile(savefileId) || savefileId > 100) {
         var json = StorageManager.load(savefileId);
         this.createGameObjects();
         this.extractSaveContents(JsonEx.parse(json));
-        this._lastAccessedId = savefileId;
+        if (savefileId < 100) {
+            this._lastAccessedId = savefileId;
+        }
         return true;
     } else {
         return false;
