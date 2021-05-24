@@ -13,4 +13,13 @@
   Window_Base.prototype.drawText = function (text, x, y, maxWidth, align) {
     this.contents.drawText(text, x, y, maxWidth, this.lineHeight(), align || 'center');
   };
+
+  Window_ChoiceList.prototype.drawItem = function (index) {
+    var rect = this.itemRectForText(index);
+    if ($gameMessage.choicePositionType() === 1) {
+      this.drawText(this.commandName(index), rect.x, rect.y, rect.width, 'center');
+    } else {
+      this.drawTextEx(this.commandName(index), rect.x, rect.y);
+    }
+  };
 }) ();
