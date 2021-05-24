@@ -642,17 +642,17 @@ StorageManager.isLocalMode = function() {
   }
 };
 
-StorageManager.localFilePath = function(savefileId) {
-  var name;
-  if (savefileId < 0) {
-    name = Yanfly.Param.SaveTechLocalConfig;
-  } else if (savefileId === 0) {
-    name = Yanfly.Param.SaveTechLocalGlobal;
-  } else {
-    name = Yanfly.Param.SaveTechLocalSave.format(savefileId);
-  }
-  return this.localFileDirectoryPath() + name;
-};
+// StorageManager.localFilePath = function(savefileId) {
+//   var name;
+//   if (savefileId < 0) {
+//     name = Yanfly.Param.SaveTechLocalConfig;
+//   } else if (savefileId === 0) {
+//     name = Yanfly.Param.SaveTechLocalGlobal;
+//   } else {
+//     name = Yanfly.Param.SaveTechLocalSave.format(savefileId);
+//   }
+//   return this.localFileDirectoryPath() + name;
+// };
 
 Yanfly.Save.StorageManager_webStorageKey = StorageManager.webStorageKey;
 StorageManager.webStorageKey = function(savefileId) {

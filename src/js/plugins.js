@@ -21,5 +21,5 @@ var $plugins =
 {"name":"Credits","status":true,"description":"主页按钮","parameters":{"按钮标题A":"制作组","按钮A公共事件ID":"2","按钮标题B":"","按钮B公共事件ID":"3","回忆之间组按钮标题":"回忆之间","回忆之间公共事件ID":"4"}},
 {"name":"TitleCommandPosition","status":true,"description":"Changes the position of the title command window.","parameters":{"Offset X":"-440","Offset Y":"100","Width":"160","Background":"2"}},
 {"name":"changeFont","status":true,"description":"修改字体","parameters":{}},
-{"name":"title","status":true,"description":"主界面效果修改","parameters":{}}
+{"name":"title","status":true,"description":"主界面效果修改","parameters":{"默认图片":"hiiro_水手服_设计"}}
 ];
