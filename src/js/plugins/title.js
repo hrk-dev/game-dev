@@ -1,8 +1,16 @@
 /*:
  * @plugindesc 主界面效果修改
  * @author Blacktunes
+ *
+ * @param 默认图片
+ * @require 1
+ * @dir img/pictures/
+ * @type file
  */
+
 (function () {
+  const pic = PluginManager.parameters('title')['默认图片'] || ''
+
   Scene_Title.prototype.create = function () {
     Scene_Base.prototype.create.call(this);
     this.createBackground();
@@ -25,7 +33,7 @@
 
   Scene_Title.prototype.createBackground = function () {
     const globalInfo = DataManager.loadGlobalInfo() || [];
-    this._backSprite1 = new Sprite(ImageManager.loadPicture(globalInfo[0] && globalInfo[0].title ? globalInfo[0].title : ''));
+    this._backSprite1 = new Sprite(ImageManager.loadPicture(globalInfo[0] && globalInfo[0].title ? globalInfo[0].title : pic));
     this._backSprite2 = new Sprite(ImageManager.loadPicture(''));
     this.addChild(this._backSprite1);
     this.addChild(this._backSprite2);
