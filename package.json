@@ -1,5 +1,5 @@
 {
-  "name": "game-electron",
+  "name": "game-dev",
   "version": "1.0.0",
   "main": "src/main.js",
   "scripts": {
@@ -8,6 +8,18 @@
     "dist": "electron-packager src Hiiro --overwrite --icon=src/icon/icon.ico --asar --out=dist"
   },
   "author": "Blacktunes",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrk-dev/game-dev.git"
+  },
+  "keywords": [
+    "rpgmakermv",
+    "electron"
+  ],
+  "bugs": {
+    "url": "https://github.com/hrk-dev/game-dev/issues"
+  },
+  "homepage": "https://github.com/hrk-dev/game-dev#readme",
   "devDependencies": {
     "electron": "^12.0.7",
     "electron-packager": "^15.2.0",
