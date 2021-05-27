@@ -253,6 +253,7 @@ DataManager.loadGlobalInfo = function () {
                 delete globalInfo[i];
             }
         }
+        globalInfo = globalInfo.filter(i => i)
         return globalInfo;
     } else {
         return [];

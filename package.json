@@ -5,7 +5,7 @@
   "scripts": {
     "watch": "nodemon --watch build --watch src --exec electron .",
     "start": "electron .",
-    "dist": "electron-packager src Hiiro --overwrite --icon=src/icon/icon.ico --asar --out=dist"
+    "dist": "electron-packager src Hiiro-dev --overwrite --icon=src/icon/icon.ico --asar --out=dist"
   },
   "author": "Blacktunes",
   "repository": {
