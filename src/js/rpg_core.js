@@ -199,13 +199,12 @@ Utils.isOptionValid = function (name) {
 /**
  * Checks whether the platform is NW.js.
  *
- * @change
  * @static
  * @method isNwjs
  * @return {Boolean} True if the platform is NW.js
  */
 Utils.isNwjs = function () {
-    return false
+    return typeof require === 'function' && typeof process === 'object';
 };
 
 /**
@@ -2123,7 +2122,6 @@ Graphics.playVideo = function (src) {
 };
 
 /**
- * @change vue适配
  * @static
  * @method _playVideo
  * @param {String} src
@@ -2136,15 +2134,6 @@ Graphics._playVideo = function (src) {
     this._video.onended = this._onVideoEnd.bind(this);
     this._video.load();
     this._videoLoading = true;
-    if (vueApp) {
-        vueApp.video.show = true
-        this._video.oncanplay = () => {
-            vueApp.video.duration = this._video.duration | 0
-        }
-        this._video.ontimeupdate = () => {
-            vueApp.video.current = this._video.currentTime | 0
-        }
-    }
 };
 
 /**
@@ -2369,7 +2358,6 @@ Graphics._updateAllElements = function () {
 };
 
 /**
- * @change vue适配
  * @static
  * @method _updateRealScale
  * @private
@@ -2377,18 +2365,10 @@ Graphics._updateAllElements = function () {
 Graphics._updateRealScale = function () {
     if (this._stretchEnabled) {
         var h = window.innerWidth / this._width;
-        var v = (window.innerHeight - 30) / this._height;
+        var v = window.innerHeight / this._height;
         if (h >= 1 && h - 0.01 <= 1) h = 1;
         if (v >= 1 && v - 0.01 <= 1) v = 1;
         this._realScale = Math.min(h, v);
-
-        if (vueApp) {
-            vueApp.main.width = this._width * this._realScale
-            vueApp.main.height = this._height * this._realScale
-            vueApp.main.scale = this._realScale
-            const margin = (window.innerHeight - 30 - vueApp.main.height) / 2;
-            vueApp.main.margin = `${margin + 30}px auto ${margin}px auto`
-        }
     } else {
         this._realScale = this._scale;
     }
@@ -2408,13 +2388,12 @@ Graphics._makeErrorHtml = function (name, message) {
 };
 
 /**
- * @change
  * @static
  * @method _defaultStretchMode
  * @private
  */
 Graphics._defaultStretchMode = function () {
-    return true
+    return Utils.isNwjs() || Utils.isMobileDevice();
 };
 
 /**
@@ -2646,7 +2625,6 @@ Graphics._createFPSMeter = function () {
 };
 
 /**
- * @change vue适配
  * @static
  * @method _createModeBox
  * @private
@@ -2656,7 +2634,7 @@ Graphics._createModeBox = function () {
     box.id = 'modeTextBack';
     box.style.position = 'absolute';
     box.style.left = '5px';
-    box.style.top = '35px';
+    box.style.top = '5px';
     box.style.width = '119px';
     box.style.height = '58px';
     box.style.background = 'rgba(0,0,0,0.2)';
@@ -2714,7 +2692,6 @@ Graphics._createFontLoader = function (name) {
 };
 
 /**
- * @change vue适配
  * @static
  * @method _centerElement
  * @param {HTMLElement} element
@@ -2724,8 +2701,7 @@ Graphics._centerElement = function (element) {
     var width = element.width * this._realScale;
     var height = element.height * this._realScale;
     element.style.position = 'absolute';
-    const margin = (window.innerHeight - 30 - height) / 2;
-    element.style.margin = `${margin + 30}px auto ${margin}px auto`;
+    element.style.margin = 'auto';
     element.style.top = 0;
     element.style.left = 0;
     element.style.right = 0;
@@ -2795,15 +2771,11 @@ Graphics._onVideoError = function () {
 };
 
 /**
- * @change vue适配
  * @static
  * @method _onVideoEnd
  * @private
  */
 Graphics._onVideoEnd = function () {
-    if (vueApp) {
-        vueApp.video.show = false
-    }
     this._updateVisibility(false);
 };
 
@@ -2851,7 +2823,6 @@ Graphics._onWindowResize = function () {
 };
 
 /**
- * @change
  * @static
  * @method _onKeyDown
  * @param {KeyboardEvent} event
@@ -2864,14 +2835,14 @@ Graphics._onKeyDown = function (event) {
                 event.preventDefault();
                 this._switchFPSMeter();
                 break;
-            // case 114:   // F3
-                // event.preventDefault();
-                // this._switchStretchMode();
-                // break;
-            // case 115:   // F4
-                // event.preventDefault();
-                // this._switchFullScreen();
-                // break;
+            case 114:   // F3
+                event.preventDefault();
+                this._switchStretchMode();
+                break;
+            case 115:   // F4
+                event.preventDefault();
+                this._switchFullScreen();
+                break;
         }
     }
 };
