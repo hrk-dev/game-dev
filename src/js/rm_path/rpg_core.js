@@ -114,7 +114,7 @@ Graphics._centerElement = function (element) {
  */
 Graphics._onVideoEnd = function () {
   if (VueMain.app) {
-    VueMain.app.video.show = false
+    VueMain.app.$refs.video.show = false
   }
   this._updateVisibility(false);
 };

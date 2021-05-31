@@ -1,0 +1,8 @@
+<div>
+  <VTitle ref="title" @ipc="ipc" />
+  <VMain :width="main.width" :height="main.height" :margin="main.margin">
+    <VVideo ref="video" :scale="main.scale" />
+    <Danmu ref="danmu" :height="main.height" :fontSize="_fontSize" />
+    <Ending ref="ending" :fontSize="_fontSize" :scale="main.scale" />
+  </VMain>
+</div>

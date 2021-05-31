@@ -6,35 +6,40 @@ function VueMain() {
   throw new Error('This is a static class')
 }
 
-VueMain.viewPath = path.join(__dirname, './js/vue/view')
+VueMain.appPath = path.join(__dirname, './js/vue/app')
 
 VueMain.componentsPath = path.join(__dirname, './js/vue/components')
 
-VueMain.getViewPath = function (name) {
-  return path.join(this.viewPath, name)
+VueMain.getAppPath = function (name) {
+  return path.join(this.appPath, name)
 }
 
-VueMain.getComponentsPath = function (name) {
+VueMain.getComponentPath = function (name) {
   return path.join(this.componentsPath, name)
 }
 
-VueMain.getViewTemplate = function (name) {
-  return fs.readFileSync(this.getViewPath(name + '.html')).toLocaleString()
+VueMain.loadTemplate = function (name) {
+  return fs.readFileSync(this.getAppPath(name + '.html')).toLocaleString()
 }
 
-VueMain.getComponentsTemplate = function (name) {
-  return fs.readFileSync(this.getComponentsPath(name + '.html')).toLocaleString()
+VueMain.loadComponent = function (name) {
+  return 'url:' + this.getComponentPath(name + '.vue')
 }
 
-VueMain.setup = function() {
-  const compontensList = fs.readdirSync(this.componentsPath)
-  compontensList.forEach(name => {
-    if (name.endsWith('.js')) {
-      require(this.getComponentsPath(name))
-    }
+httpVueLoader.langProcessor.stylus = function (stylusText) {
+  return new Promise((resolve, reject) => {
+    stylus.render(stylusText.trim(), {}, (err, css) => {
+      if (err) reject(err)
+      resolve(css)
+    })
   })
-  require(this.getViewPath('app.js'))
-  require(path.join(__dirname, './js/vue/methods.js'))
+}
+
+Vue.use(httpVueLoader)
+
+VueMain.setup = function () {
+  require(this.getAppPath('app.js'))
+  require(this.getAppPath('methods.js'))
 }
 
 VueMain.setup()

@@ -1,8 +1,26 @@
-/**
- * 测试功能
- */
-Vue.component('Danmu', {
-  template: VueMain.getComponentsTemplate('danmu'),
+<template>
+  <div
+    class="danmu-list"
+    :style="{
+      fontSize: fontSize + 'px',
+      lineHeight: fontSize + 10 + 'px',
+    }"
+  >
+    <template v-for="(item, key) in list">
+      <div
+        :key="key"
+        class="danmu"
+        :style="{ top: item.top }"
+        v-show="item.show"
+      >
+        {{ item.text }}
+      </div>
+    </template>
+  </div>
+</template>
+
+<script>
+module.exports = {
   props: {
     height: Number,
     fontSize: Number
@@ -52,4 +70,25 @@ Vue.component('Danmu', {
       });
     }
   }
-})
+}
+</script>
+
+<style lang="stylus" scoped>
+.danmu-list
+  position absolute
+  top 0
+  left 0
+  height 100%
+  width 100%
+
+  .danmu
+    display inline
+    word-break keep-all
+    white-space nowrap
+    z-index 102
+    position absolute
+    left 100%
+    animation danmu 5s linear
+    color pink
+    text-shadow 0 0 2px rgba(0, 0, 0, 0.9)
+</style>
