@@ -1,0 +1,25 @@
+<transition name="fade">
+  <div class="video" v-if="show">
+    <div
+      class="video-time"
+      :style="{
+          'font-size': 16 * scale + 'px',
+          'line-height': 30  * scale + 'px'
+        }"
+    >
+      {{_currentTime}}/{{_durationTime}}
+    </div>
+    <div
+      class="video-btn title-btn"
+      :style="{
+          'font-size': 22 * scale + 'px',
+          'line-height': 25  * scale + 'px',
+          width: 30 * scale + 'px',
+          height: 30 * scale + 'px'
+        }"
+      @click="hideVideoWindow"
+    >
+      ■
+    </div>
+  </div>
+</transition>

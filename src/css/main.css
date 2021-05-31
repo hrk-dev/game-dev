@@ -1,11 +1,9 @@
 body {
   margin: 0;
-  font-family: 'GAMEFONT';
+  font-family: "GAMEFONT";
 }
-#app {
-  height: 100vh;
-  width: 100vw;
-}
+
+/* 标题栏 */
 #title {
   display: flex;
   justify-content: space-between;
@@ -23,7 +21,7 @@ body {
   transition: background-color 0.2s;
   font-family: auto;
 }
-.icon-text {
+.title-icon-text {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,32 +30,33 @@ body {
   animation: title-show 1s;
   animation-fill-mode: forwards;
 }
-.icon {
+.title-icon {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 30px;
   width: 30px;
 }
-.text {
+.title-text {
   margin-left: 5px;
 }
-.btn-list {
+.title-btn-list {
   display: flex;
 }
-.btn {
+.title-btn {
   line-height: 27px;
   height: 27px;
   width: 45px;
   text-align: center;
   -webkit-app-region: no-drag;
 }
-.btn:hover {
+.title-btn:hover {
   background: #fadbd8;
 }
-.btn:active {
+.title-btn:active {
   background: #f5b7bb;
 }
+
 #main {
   overflow: hidden;
   position: absolute;
@@ -66,6 +65,8 @@ body {
   font-size: 30px;
   line-height: 30px;
 }
+
+/* 弹幕样式，测试用 */
 .danmu-list {
   position: absolute;
   top: 0;
@@ -84,6 +85,8 @@ body {
   color: pink;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.9);
 }
+
+/* 视频播放控制 */
 .video {
   z-index: 1;
   position: absolute;
@@ -108,7 +111,9 @@ body {
   transform: translateX(-50%);
   cursor: pointer;
 }
-.end-wrapper {
+
+/* 结束动画 */
+.ending-wrapper {
   position: absolute;
   top: 0;
   left: 0;
@@ -116,16 +121,16 @@ body {
   width: 100%;
   background: #000;
 }
-.end-text {
+.ending-text {
   position: relative;
   color: #fff;
   text-align: center;
   width: 100%;
 }
-.end-text-bug {
+.ending-text-bug {
   transition: all 0.6s ease-in-out;
 }
-.end-text-animation {
+.ending-text-animation {
   content: "";
   width: 99%;
   position: absolute;
@@ -141,6 +146,6 @@ body {
   animation: glitch 3s infinite;
   animation-timing-function: steps(2, end);
 }
-.end-title {
+.ending-title {
   margin-top: 2%;
 }

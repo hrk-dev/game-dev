@@ -1,0 +1,15 @@
+<div id="title" :style="{background: color}">
+  <div class="title-icon-text">
+    <div class="title-icon">
+      <img style="height: 60%" src="./icon/icon.ico" />
+    </div>
+    <div class="title-text">{{title}}</div>
+  </div>
+  <div class="title-btn-list">
+    <div class="title-btn" @click="ipc('app:reload')">Re</div>
+    <div class="title-btn" style="width: 50px" @click="ipc('app:dev')">Dev</div>
+    <div class="title-btn" style="line-height: 20px" @click="ipc('app:min')">_</div>
+    <div class="title-btn" @click="ipc('app:max')">□</div>
+    <div class="title-btn" @click="ipc('app:quit')">×</div>
+  </div>
+</div>

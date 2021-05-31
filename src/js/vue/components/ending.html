@@ -1,0 +1,110 @@
+<transition name="fade">
+  <div class="ending-wrapper" v-if="show">
+    <div
+      class="ending-text"
+      :style="{
+        fontSize: fontSize + 'px',
+        lineHeight: (fontSize + 4) + 'px',
+        top: 160 * scale + 'px'
+      }"
+    >
+      <div
+        class="ending-title"
+        :style="{
+            'font-size': 36 * scale + 'px'
+          }"
+      >
+        特别鸣谢
+      </div>
+      <div
+        :style="{
+            'font-size': 24 * scale + 'px'
+          }"
+      >
+        Special Thanks
+      </div>
+      <div
+        class="ending-title"
+        :style="{
+            'font-size': 36 * scale + 'px'
+          }"
+      >
+        Debug
+      </div>
+      <div
+        :style="{
+            'font-size': 24 * scale + 'px'
+          }"
+      >
+        You
+      </div>
+      <div
+        class="ending-title"
+        :style="{
+            'font-size': 36 * scale + 'px'
+          }"
+      >
+        Bug
+      </div>
+      <div
+        class="ending-text-bug"
+        :style="{
+            filter: blur,
+            color: color,
+            'font-size': 24 * scale + 'px'
+          }"
+      >
+        {{text}}
+      </div>
+      <div class="ending-text-animation" v-show="animation">
+        <div
+          class="ending-title"
+          :style="{
+            'font-size': 36 * scale + 'px'
+          }"
+        >
+          特别鸣谢
+        </div>
+        <div
+          :style="{
+            'font-size': 24 * scale + 'px'
+          }"
+        >
+          Special Thanks
+        </div>
+        <div
+          class="ending-title"
+          :style="{
+            'font-size': 36 * scale + 'px'
+          }"
+        >
+          Debug
+        </div>
+        <div
+          :style="{
+            'font-size': 24 * scale + 'px'
+          }"
+        >
+          You
+        </div>
+        <div
+          class="ending-title"
+          :style="{
+            'font-size': 36 * scale + 'px'
+          }"
+        >
+          Bug
+        </div>
+        <div
+          class="ending-text-bug"
+          :style="{
+            filter: blur,
+            'font-size': 24 * scale + 'px'
+          }"
+        >
+          {{text}}
+        </div>
+      </div>
+    </div>
+  </div>
+</transition>

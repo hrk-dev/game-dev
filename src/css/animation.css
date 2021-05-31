@@ -1,12 +1,16 @@
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0 !important;
 }
-.fade-enter-to, .fade-leave {
+.fade-enter-to,
+.fade-leave {
   opacity: 1 !important;
 }
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.5s;
 }
+
 @keyframes danmu {
   from {
     left: 100%;
@@ -15,6 +19,7 @@
     left: -100%;
   }
 }
+
 @keyframes title-show {
   from {
     opacity: 0;
@@ -23,6 +28,7 @@
     opacity: 1;
   }
 }
+
 @keyframes glitch {
   0% {
     -webkit-clip-path: inset(48% 0 16% 0);

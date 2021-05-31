@@ -16,13 +16,13 @@ Graphics._playVideo = function (src) {
   this._video.onended = this._onVideoEnd.bind(this);
   this._video.load();
   this._videoLoading = true;
-  if (vueApp) {
-    vueApp.video.show = true
+  if (VueMain.app) {
+    VueMain.app.$refs.video.show = true
     this._video.oncanplay = () => {
-      vueApp.video.duration = this._video.duration | 0
+      VueMain.app.$refs.video.duration = this._video.duration | 0
     }
     this._video.ontimeupdate = () => {
-      vueApp.video.current = this._video.currentTime | 0
+      VueMain.app.$refs.video.current = this._video.currentTime | 0
     }
   }
 };
@@ -39,12 +39,12 @@ Graphics._updateRealScale = function () {
     if (v >= 1 && v - 0.01 <= 1) v = 1;
     this._realScale = Math.min(h, v);
 
-    if (vueApp) {
-      vueApp.main.width = this._width * this._realScale
-      vueApp.main.height = this._height * this._realScale
-      vueApp.main.scale = this._realScale
-      const margin = (window.innerHeight - 30 - vueApp.main.height) / 2;
-      vueApp.main.margin = `${margin + 30}px auto ${margin}px auto`
+    if (VueMain.app) {
+      VueMain.app.main.width = this._width * this._realScale
+      VueMain.app.main.height = this._height * this._realScale
+      VueMain.app.main.scale = this._realScale
+      const margin = (window.innerHeight - 30 - VueMain.app.main.height) / 2;
+      VueMain.app.main.margin = `${margin + 30}px auto ${margin}px auto`
     }
   } else {
     this._realScale = this._scale;
@@ -113,8 +113,8 @@ Graphics._centerElement = function (element) {
  * 视频播放结束隐藏VUE层
  */
 Graphics._onVideoEnd = function () {
-  if (vueApp) {
-    vueApp.video.show = false
+  if (VueMain.app) {
+    VueMain.app.video.show = false
   }
   this._updateVisibility(false);
 };
