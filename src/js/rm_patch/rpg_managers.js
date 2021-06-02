@@ -98,15 +98,3 @@ StorageManager.webStorageKey = function (savefileId) {
     return 'RPG LOOP%1'.format(savefileId);
   }
 };
-
-/**
- * 加载周目存档
- */
-DataManager.loadLoop = function (saveId) {
-  const map = $gameMap
-  if (DataManager.loadGame(saveId)) {
-    SoundManager.playLoad();
-    $gameMap = map
-    this._loadSuccess = true;
-  }
-}

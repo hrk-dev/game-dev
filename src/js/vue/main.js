@@ -2,28 +2,30 @@ var electron = require('electron')
 var fs = require('fs')
 var path = require('path')
 
-function VueMain() {
-  throw new Error('This is a static class')
-}
+var VueMain = class {
+  static appPath = path.join(__dirname, './js/vue/app')
 
-VueMain.appPath = path.join(__dirname, './js/vue/app')
+  static componentsPath = path.join(__dirname, './js/vue/components')
 
-VueMain.componentsPath = path.join(__dirname, './js/vue/components')
+  static getAppPath = function (name) {
+    return path.join(VueMain.appPath, name)
+  }
 
-VueMain.getAppPath = function (name) {
-  return path.join(this.appPath, name)
-}
+  static getComponentPath = function (name) {
+    return path.join(VueMain.componentsPath, name)
+  }
 
-VueMain.getComponentPath = function (name) {
-  return path.join(this.componentsPath, name)
-}
+  static loadTemplate = function (name) {
+    return fs.readFileSync(VueMain.getAppPath(name + '.html')).toLocaleString()
+  }
 
-VueMain.loadTemplate = function (name) {
-  return fs.readFileSync(this.getAppPath(name + '.html')).toLocaleString()
-}
-
-VueMain.loadComponent = function (name) {
-  return 'url:' + this.getComponentPath(name + '.vue')
+  static loadComponent = function (name) {
+    return 'url:' + VueMain.getComponentPath(name + '.vue')
+  }
+  static setup = function () {
+    require(VueMain.getAppPath('app.js'))
+    require(VueMain.getAppPath('methods.js'))
+  }
 }
 
 httpVueLoader.langProcessor.stylus = function (stylusText) {
@@ -36,10 +38,5 @@ httpVueLoader.langProcessor.stylus = function (stylusText) {
 }
 
 Vue.use(httpVueLoader)
-
-VueMain.setup = function () {
-  require(this.getAppPath('app.js'))
-  require(this.getAppPath('methods.js'))
-}
 
 VueMain.setup()

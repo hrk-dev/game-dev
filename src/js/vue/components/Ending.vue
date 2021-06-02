@@ -128,19 +128,21 @@ module.exports = {
   }),
   methods: {
     startEnding() {
+      Patch.startWait()
       this.text = 'Hiiro'
       this.color = '#fff'
       this.show = true
       setTimeout(() => {
         this.animation = true
         setTimeout(() => {
-          this.blur = `blur(${this._fontSize}px)`
+          this.blur = `blur(${this.fontSize}px)`
           setTimeout(() => {
             this.animation = false
             this.text = 'Hirro'
             this.color = 'pink'
             this.blur = 'blur(0)'
             setTimeout(() => {
+              Patch.stopWait()
               this.show = false
             }, 5000)
           }, 600)
@@ -171,7 +173,7 @@ module.exports = {
   width 100%
 
 .ending-text-bug
-  transition all 0.6s ease-in-out
+  transition color 0.6s ease-in-out, filter 0.6s ease-in-out
 
 .ending-text-animation
   content ''
