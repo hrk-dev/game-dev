@@ -65,3 +65,31 @@ ipcMain.on('app:reload', () => {
 ipcMain.on('vue:ready', () => {
   mainWindow.show()
 })
+
+
+let blogWindow
+ipcMain.on('open-blog', () => {
+  if (blogWindow) {
+    blogWindow.show()
+  } else {
+    blogWindow = new BrowserWindow({
+      show: false,
+      width: 1024,
+      height: 768,
+      webPreferences: {
+        preload: path.join(__dirname, 'preload.js'),
+        nodeIntegration: true,
+        contextIsolation: false
+      }
+    })
+    blogWindow.setMenu(null)
+    blogWindow.loadFile(path.join(__dirname, './blog/index.html'))
+
+    blogWindow.once('ready-to-show', () => {
+      blogWindow.show()
+    })
+    blogWindow.once('closed', () => {
+      blogWindow = null
+    })
+  }
+})
