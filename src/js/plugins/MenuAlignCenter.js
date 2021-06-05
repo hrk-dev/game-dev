@@ -40,7 +40,11 @@
         break;
     }
     if (positionType === 1) {
-      this.y = (Graphics.height - this.windowHeight()) / 2
+      if (messageY >= Graphics.boxHeight / 2 || !this._messageWindow._textState) {
+        this.y = (Graphics.height - this.windowHeight()) / 2
+      } else {
+        this.y = messageY + this._messageWindow.height;
+      }
     } else {
       if (messageY >= Graphics.boxHeight / 2) {
         this.y = messageY - this.height;
