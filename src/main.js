@@ -93,3 +93,30 @@ ipcMain.on('open-blog', () => {
     })
   }
 })
+
+let hrkWindow
+ipcMain.on('open-hrk', () => {
+  if (hrkWindow) {
+    hrkWindow.show()
+  } else {
+    hrkWindow = new BrowserWindow({
+      show: false,
+      width: 1024,
+      height: 768,
+      webPreferences: {
+        preload: path.join(__dirname, 'preload.js'),
+        nodeIntegration: true,
+        contextIsolation: false
+      }
+    })
+    hrkWindow.setMenu(null)
+    hrkWindow.loadFile(path.join(__dirname, './html/hrk/index.html'))
+
+    hrkWindow.once('ready-to-show', () => {
+      hrkWindow.show()
+    })
+    hrkWindow.once('closed', () => {
+      hrkWindow = null
+    })
+  }
+})
