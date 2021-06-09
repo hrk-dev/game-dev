@@ -21,5 +21,6 @@ var $plugins =
 {"name":"Credits","status":true,"description":"主页按钮","parameters":{"按钮标题A":"Develop Team","按钮A公共事件ID":"2","按钮标题B":"","按钮B公共事件ID":"3","回忆之间组按钮标题":"Gallery","回忆之间公共事件ID":"4"}},
 {"name":"TitleCommandPosition","status":true,"description":"Changes the position of the title command window.","parameters":{"Offset X":"-440","Offset Y":"100","Width":"180","Background":"2"}},
 {"name":"title","status":true,"description":"主界面效果修改","parameters":{"默认图片":"hiiro_水手服_设计"}},
-{"name":"menu","status":true,"description":"修改游戏菜单","parameters":{}}
+{"name":"menu","status":true,"description":"修改游戏菜单","parameters":{}},
+{"name":"Galv_ScreenZoom","status":true,"description":"(v.1.1) Zoom in on a certain part of the screen","parameters":{"Battle Zoom":"1"}}
 ];
