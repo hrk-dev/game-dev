@@ -83,7 +83,7 @@ ipcMain.on('open-blog', () => {
       }
     })
     blogWindow.setMenu(null)
-    blogWindow.loadFile(path.join(__dirname, './blog/index.html'))
+    blogWindow.loadFile(path.join(__dirname, './html/blog/index.html'))
 
     blogWindow.once('ready-to-show', () => {
       blogWindow.show()
