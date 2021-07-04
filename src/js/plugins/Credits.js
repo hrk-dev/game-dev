@@ -56,6 +56,11 @@
 
 
 	var _credits = Scene_Title.prototype.createCommandWindow;
+
+	Scene_Title.prototype.fadeSpeed = function () {
+		return 1
+	}
+
 	Scene_Title.prototype.createCommandWindow = function () {
 		_credits.call(this);
 		this._commandWindow.setHandler('mcredits_A', this.commandCreditsA.bind(this));
