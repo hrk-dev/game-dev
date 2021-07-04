@@ -98,3 +98,17 @@ StorageManager.webStorageKey = function (savefileId) {
     return 'RPG LOOP%1'.format(savefileId);
   }
 };
+
+DataManager.makeSavefileInfo = function() {
+  var info = {};
+  info.globalId   = this._globalId;
+  info.title      = $dataSystem.gameTitle;
+  info.characters = $gameParty.charactersForSavefile();
+  info.faces      = $gameParty.facesForSavefile();
+  info.playtime   = $gameSystem.playtimeText();
+  info.timestamp  = Date.now();
+  // 周目信息
+  info.loop       = $gameSystem.loop
+  console.log(info)
+  return info;
+};
