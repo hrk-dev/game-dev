@@ -112,3 +112,20 @@ DataManager.makeSavefileInfo = function() {
   console.log(info)
   return info;
 };
+
+SceneManager.onKeyDown = function (event) {
+  if (!event.ctrlKey && !event.altKey) {
+    switch (event.keyCode) {
+      case 116:   // F5
+        if (electron) {
+          electron.ipcRenderer.send('app:reload')
+        }
+        break;
+      case 123:   // F12
+        if (electron) {
+          electron.ipcRenderer.send('app:dev')
+        }
+        break;
+    }
+  }
+};
