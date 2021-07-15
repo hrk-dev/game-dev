@@ -18,7 +18,6 @@ var Patch = class {
     if (DataManager.loadGame(saveId)) {
       SoundManager.playLoad()
       $gameMap = map
-      $gameSystem.onAfterLoad()
     }
   }
   /**
